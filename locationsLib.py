@@ -11,7 +11,7 @@ travelToLocations = {"city" : "Steep Hills", "village" : "Old Castle"}
 
 city = {
     #location : [indoor/outdoor,room description,unique commands,items]
-    "Market" : ["outdoor", "'enter', 'go-to', 'travel-to'",'function with items'],
+    "Market" : ["outdoor","Simple market with some sellers.", "'enter', 'go-to', 'travel-to'",'function with items'],
     "Doctor" : ["heal", "trade"],
     "Chemist" : ["trade"],
     "Grocer" : ["trade"],
@@ -20,9 +20,9 @@ city = {
     "Clothier" : ["trade"],
     "Heliport" : "'leave'",
     "Laboratory" : "'craft'",
-    "Garage" : ["indoor", "'upgrade', 'repair'"],
-    "Save House" : ["indoor", "'save', 'load', 'sleep', 'leave'"],
-    "Street" : ["outdoor", "My small house, with garage, ", "'enter', 'go-to', 'travel-to'","list –> room items (pocet,objevene)"]
+    "Garage" : ["indoor", "Almost empty room with a locked chest and warderobe.", "'upgrade', 'repair'","list –> room items (pocet,objevene)"],
+    "Save House" : ["indoor", "My small house, with garage, and everything I need to survive with.", "'save', 'load', 'sleep', 'leave'","list –> room items (pocet,objevene)"],
+    "Street" : ["outdoor", "Just a street. A way to go somewhere.", "'enter', 'go-to', 'travel-to'","list –> room items (pocet,objevene)"]
     }
 
 village = {

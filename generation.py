@@ -39,10 +39,12 @@ def generatePlayer(items):
     playerLib.player.location = str("Save House")
     #print("Loading: " + playerLib.player.playerName + " was moved to " + locationsLib.travelToLocations[place] + ".")
 
-def generateNPC(location, type): # vytvoří NPC na pozici, kterou dostane zadanou, přidá atributy, zbraně,  oblečení
+    
+
+def generateNPC(location, npcType): # vytvoří NPC na pozici, kterou dostane zadanou, přidá atributy, zbraně,  oblečení
     pass
 
-def generateQuest(type): # musím napsat několik quest scénářů, které bude funkce později generovat
+def generateQuest(questType): # musím napsat několik quest scénářů, které bude funkce později generovat
     pass
 
 def generateRandomQ(): # určitá percentuelní šance ve volné jízdě, že se po každém tahhu vyvolá funkce

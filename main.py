@@ -28,12 +28,14 @@ secondScreen = True
 #gamefunctions.gui()
 #MAIN MENU
 while menu:
-    menuDecision = input("COMMAND: ")
+    #menuDecision = input("COMMAND: ")
+    menuDecision = 'play'
     if menuDecision == "play":
         secondScreen = True
         gamefunctions.playButton()
         while secondScreen:
-            menuDecision2 = input("COMMAND: ")
+            #menuDecision2 = input("COMMAND: ")
+            menuDecision2 = 'campaign'
             if menuDecision2 == "campaign":
                 storyPlay = True
                 generation.generatePlayer(generation.playerStartingItems)

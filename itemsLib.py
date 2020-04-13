@@ -2,6 +2,9 @@
 
 #UN-EQUIPABLE ITEMS
 # hunger decrease / hp increase / thirst decrease / weight PŘIDAT!!!! / value of the item / description     Hardcore = pokud je jídlo 100% ok
+items = []
+
+
 foodProps = {
     "steak" : [30, 10, 2, "common item", "Medium rare steak."],
     "apple" : [6, 3, 3, "common item", "An apple a day keeps doctor away!"],
@@ -42,6 +45,7 @@ beverageProps = {
 toolsProps = {
     "key" : "",
     "wrench" : "",
+    "tissues" : "",
 }
 
 #EQUIPABLE ITEMS

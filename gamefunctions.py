@@ -63,26 +63,48 @@ def textElement(text):
     animPrint(textAdapt(text))
     print("*" + width2*" " + "*")
     time.sleep(0.03)
-    print(width*"*")    
+    print(width*"*")  
+    
+def centerText(text):
+    textLength = len(text)
+    length = (width2-textLength)
+    margin = int(length/2)
+    
+    if textLength % 2 == 0:
+        print()
+        print(width*'*')
+        time.sleep(0.03)
+        print('*' + margin*' ' + text + margin*' ' +'*')
+        time.sleep(0.03)
+        print(width*'*')
+        print()
+    else:
+        print()
+        print(width*'*')
+        time.sleep(0.03)
+        print("*"+margin*' '+text+(margin+1)*' ' +'*')
+        time.sleep(0.03)
+        print(width*'*')
+        print()
             
 def helpMe():
     print(width*"*")
     time.sleep(0.03)
     print("*" + width2*" " + "*")
-    animPrint(textAdapt("GAME: You're at " + str(playerLib.player.location) + ". Here you can use these commands:"))
+    animPrint(textAdapt("GAME: Here you can use these unique commands: "))
     print("*" + width2*" " + "*")
-    animPrint(textAdapt(str(locationsLib.city[playerLib.player.location][1])))
+    animPrint(textAdapt(str(locationsLib.city[playerLib.player.location][2])))
     print("*" + width2*" " + "*")
     time.sleep(0.03)
     print(width*"*")
 
 def actualObjective():
     print(width*"*")
-    time.sleep(0.175)
+    time.sleep(0.03)
     print("*" + width2*" " + "*")
-    animPrint(textAdapt("GAME: " + objectives[objCount]))
+    animPrint(textAdapt("OBJECTIVE: " + objectives[objCount]))
     print("*" + width2*" " + "*")
-    time.sleep(0.175)
+    time.sleep(0.03)
     print(width*"*")
 
 def logo():
@@ -238,25 +260,18 @@ def freeworld():
 
 def prolog():
     active = True
-    print(width*"*")
-    time.sleep(0.175)
-    print("*" + width2*" " + "*")
-    time.sleep(0.175)
-    print("* PROLOG" + 71*" " + "*")
-    time.sleep(0.175)
-    print("*" + width2*" " + "*")
-    animPrint(textAdapt(prologText))
-    print("*" + width2*" " + "*")
-    animPrint(textAdapt("INFO: Contacts updated! +Paul"))
+    centerText("PROLOG")
+    textElement(prologText)
+    print()
+    textElement("INFO: Contacts updated! +Paul")
     playerLib.player.contacts.append("Paul")
-    print("*" + width2*" " + "*")
-    time.sleep(0.175)
-    print(width*"*")
     print()
     actualObjective()
     while active:
         nextMove = input("COMMAND: ")
         commandSorting(nextMove)
+        
+        # nejakej quest postup.. - pokud tady tak toto - pokud toto tak tamto
     
 def quest1():
     pass
@@ -397,7 +412,9 @@ def commandSorting(command):
 
         if commandPart == "inspect":
             if len(elemenetPart) == 0:
-                textElement("WARNING: You need to use at least one argument!")
+                textElement("WARNING! You need to use at least one argument!")
+            elif elementPart[0] not in itemsLib.items:
+                textElement("WARNING! This item does not exist in this game.")
             else:
                 playerLib.player.inspect(elemenetPart[0])
 
@@ -426,27 +443,27 @@ def commandSorting(command):
                 playerLib.player.train(elemenetPart[0])
 
         if commandPart == "craft":
-            pass
+            textElement("INFO: Not implemented yet.")
 
         if commandPart == "save":
-            pass
+            textElement("INFO: Not implemented yet.")
 
         if commandPart == "load":
-            pass
+            textElement("INFO: Not implemented yet.")
 
         if commandPart == "sleep":
             playerLib.player.sleep()
 
         if commandPart == "upgrade":
-            pass
+            textElement("INFO: Not implemented yet.")
 
         if commandPart == "repair":
-            pass
+            textElement("INFO: Not implemented yet.")
 
         if commandPart == "leave":
-            pass
+            textElement("INFO: Not implemented yet.")
 
         if commandPart == "enter":
-            pass
+            textElement("INFO: Not implemented yet.")
     else:
         textElement("WARNING: Unknown command!")

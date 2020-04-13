@@ -80,6 +80,7 @@ class Player:
         
         # SPECIAL ITEMS
         self.map = False
+        self.car = False
 
     # INFO METHODS        
     def generalInfo(self):
@@ -190,7 +191,12 @@ WEAPONS
         pass
 
     def lookAround(self): # in a room, place, discover things
-        textElement(locationsLib.self.position[self.location][1])
+        if self.position == 'city':
+            gamefunctions.textElement(locationsLib.city[self.location][1])
+        if self.position == 'village':
+            pass
+        if self.position == 'forrest':
+            pass
 
     def sleep(self):
         if self.location == "Save House":
