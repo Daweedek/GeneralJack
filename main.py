@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 #GAME MECHANICS FOR RPG GAME. Started 11/03/2020, Ladislav Davídek
 
 # EASY - programováno teď, ukazuje staty automaticky (půjdeš tam a bude tě to stát tolik a tolik síly)
@@ -79,26 +80,8 @@ while menu:
 #STORY LINE
 while storyPlay:
     gamefunctions.prolog()
-    nextMove = input("NEXT MOVE: ")
- # napsat funkci, která se rozhodne, jak naložit se zadaným příkazem. !!
-    if nextMove == "quit":
-        finalDes = input("GAME: Are you sure? Y / N (Unsaved progress will be deleted)\nCOMMAND: ")
-        if finalDes == "yes" or finalDes == "y":
-            play  = False
-            storyPlay = False
-            print("INFO: Ending the game...")
-            time.sleep(1.23)
-            break
-        else:
-            pass
-    elif nextMove == "cheatMode on":
-        print("INFO: You found cheat mode!")
-        time.sleep(0.5)
-        print("INFO: Unfortunately, there is nothing yet. :)")
-        #print("INFO: For help, type 'cheatMode help' ")
-    else:
-        pass
-
+    storyPlay = False
+    
 while freeride:
     break
 

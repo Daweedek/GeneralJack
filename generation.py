@@ -8,7 +8,7 @@ import npcLib
 import playerLib
 import gamefunctions
 
-playerStartingItems = ["winter hat","sweater","winter coat","winter gloves","pants","sneakers","hunting knife",]
+playerStartingItems = ["winter-hat","sweater","winter-coat","winter-gloves","pants","sneakers","hunting-knife",]
 questTypes= ["kidnapping","gettingInformations","pickUpAndDeliver","findSomeone","stealSomething","killSomeone",]
 
 def generatePlayer(items):
@@ -36,7 +36,7 @@ def generatePlayer(items):
     #print("Loading: Equipping completed.")
     #time.sleep(1)
     playerLib.player.position = str("city")
-    playerLib.player.location = str("Save House")
+    playerLib.player.location = str("Save-house")
     #print("Loading: " + playerLib.player.playerName + " was moved to " + locationsLib.travelToLocations[place] + ".")
 
     

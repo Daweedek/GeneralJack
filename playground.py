@@ -57,4 +57,35 @@ def centerText(text):
         print(width*'*')
         print("*"+margin*' '+text+(margin+1)*' ' +'*')
         print(width*'*')
+
+
+text = "SKILLS"
+listOfSkills = ["strength","alchemy","endurance","sneaking"]
+def skillPrint(text, listOfSkills):
+    textLength = len(text)
+    length = (width2-textLength)
+    margin = int(length/2)
+    
+    if textLength % 2 == 0:
+        print()
+        print(width*'*')
+        time.sleep(0.03)
+        print('*' + margin*' ' + text + margin*' ' +'*')
+        time.sleep(0.03)
+        print("*" + width2*" " +'*')
+    else:
+        print()
+        print(width*'*')
+        time.sleep(0.03)
+        print("*"+margin*' '+text+(margin+1)*' ' +'*')
+        time.sleep(0.03)
+        print("*" + width2*" " +'*')
+        
+    for skill in listOfSkills: 
+        length2 = len(skill +": "+skill)
+        width3 = width2 - length2 - 2 
+        print("* "+skill.capitalize()+": "+skill+width3*" "+" *")
+
+    print("*" + width2*" " +'*')
+    print(width*'*')
     

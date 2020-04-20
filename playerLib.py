@@ -26,15 +26,15 @@ class Player:
         self.position = ""
         
         # attributes
-        self.strength = 0 # combat bez zbraní (dá se zlepšit klikama -> pokud větší než 120s chtít potvrzení a vypsat dobu trvání.)
-        self.sneaking = 0 # percentualni šance, že plížení vyjde  random.randint(0,self.sneaking)
-        self.alchemy = 0 # alchemy = 100 -> potion má nejvyšší účinnost
-        self.endurance = 0
+        self.strength = 0 # combat without guns
+        self.sneaking = 0 # more chance you can sneak  random.randint(0,self.sneaking)
+        self.alchemy = 0 # alchemy = 100 -> potion has better effect
+        self.endurance = 0 # dunno why yet
             
         # fighting stats
-        self.attack = 10 # zvýší se zbraní
-        self.defense = 0 # obrana zvýší se armorem
-        self.critChance = 0 # zvýší se pouze speciálními itemy
+        self.attack = 10 # grows with a gun
+        self.defense = 0 # grows with a armor
+        self.critChance = 0 # grows with a special item
 
         # essentials info
         self.daysInGame = 0
@@ -42,12 +42,13 @@ class Player:
         self.maxCarryWeight = (self.playerWeight + self.strength)
         self.messageGenerator = 0
         self.messages = {
-            # message type : message 
+            # message type (quest, conversation): message 
         }
         self.contacts = []
 
         # inventory
         self.inventory = {
+            #item : number,
             }
 
         # equipped items
@@ -88,79 +89,76 @@ class Player:
 **************************
 GENERAL INFO
 
->>> Name: """+str(self.playerName)+"""
->>> Level: """+str(self.level)+"""
->>> HP: """+str(self.health)+""" / 100
->>> XP: """+str(self.xp)+""" / """+str(self.nextLevel)+"""
->>> Gold: """+str(self.gold)+"""
->>> Carry: """+str(self.carryWeight)+""" / """+str(self.maxCarryWeight)+"""
+Name: """+str(self.playerName)+"""
+Level: """+str(self.level)+"""
+HP: """+str(self.health)+""" / 100
+XP: """+str(self.xp)+""" / """+str(self.nextLevel)+"""
+Gold: """+str(self.gold)+"""
+Carry: """+str(self.carryWeight)+""" / """+str(self.maxCarryWeight)+"""
+Position """+ self.position+"""
+Location """+self.location+"""
 
 **************************
 HUNGER & THIRST
 
->>> Hunger: """+str(self.hunger)+""" / 100
->>> Thirst: """+str(self.thirst)+""" / 100
+Hunger: """+str(self.hunger)+""" / 100
+Thirst: """+str(self.thirst)+""" / 100
 
 **************************
 ATTACK & DEFENSE
 
->>> Attack: """+str(self.attack)+""" / 100
->>> Defense: """+str(self.defense)+""" / 100
->>> Critical chance: """+str(self.critChance)+""" / 100
+Attack: """+str(self.attack)+""" / 100
+Defense: """+str(self.defense)+""" / 100
+Critical chance: """+str(self.critChance)+""" / 100
 
 **************************
 ABILITIES
 
->>> Strength: """+str(self.strength)+""" / 100
->>> Sneaking: """+str(self.sneaking)+""" / 100
->>> Alchemy: """+str(self.alchemy)+""" / 100
->>> Endurance: """+str(self.endurance)+""" / 100
+Strength: """+str(self.strength)+""" / 100
+Sneaking: """+str(self.sneaking)+""" / 100
+Alchemy: """+str(self.alchemy)+""" / 100
+Endurance: """+str(self.endurance)+""" / 100
 
 **************************""")
     
     def equipment(self):
-        gamefunctions.textElement("""EQUIPMENT\nCLOTHES\nHead: """+str(self.equippedClothes["Head"])+"""\nBody: """+str(self.equippedClothes["Body"])+"""\nLegs: """+str(self.equippedClothes["Legs"])+"""
-
-ARMOR
-
-  Head: """+str(self.equippedArmor["Head"])+"""
-  Body: """+str(self.equippedArmor["Body"])+"""
-  Legs: """+str(self.equippedArmor["Legs"])+"""
-
-GLOVES & SHOES
-
- >>> Gloves: """+str(self.equippedGloves["Gloves"])+"""
- >>> Shoes: """+str(self.equippedShoes["Shoes"])+"""
-
-WEAPONS
-
-  Small weapon: """+str(self.equippedWeapons["Small weapon"])+"""
-  Big weapon: """+str(self.equippedWeapons["Big weapon"])+"""
-  Melee: """+str(self.equippedWeapons["Melee"])+"""
-  Granades: """+str(self.equippedWeapons["Granades"])+"""
-""")
+        gamefunctions.printEquipment()
         
     def showContacts(self):
-        print(gamefunctionsLib.width*"*")
-        time.sleep(0.175)
-        print("*" + gamefunctionsLib.width2*" " + "*")
-        animPrint(textAdapt("GAME: You're at " + str(playerLib.player.position) + ". Here you can use these commands:"))
-        print("*" + gamefunctionsLib.width2*" " + "*")
-        animPrint(textAdapt(str(locationsLib.city[playerLib.player.position])))
-        print("*" + gamefunctionsLib.width2*" " + "*")
-        time.sleep(0.175)
-        print(gamefunctionsLib.width*"*")
+        gamefunctions.textElement(self.contacts)
 
     # MOVEMENT METHODS
     def goTo(self, where): #short distance walk (levels, market etc.)
-        pass
+        rightForm = where
+        rightForm = where.lower()
+        rightForm = where.capitalize()
+        if self.position == "city":
+            if rightForm in locationsLib.city[self.location][3]:
+                self.location = rightForm
+                gamefunctions.textElement("You are in "+rightForm)
+            else:
+                gamefunctions.textElement("This location is not around.")
+        elif self.position == "village":
+            if rightForm in locationsLib.village[self.location][3]:
+                self.location = rightForm
+                gamefunctions.textElement("You are in "+rightForm)
+            else:
+                gamefunctions.textElement("This location is not around.")
+        elif self.position == "forrest":
+            if rightForm in locationsLib.forrest[self.location][3]:
+                self.location = rightForm
+                gamefunctions.textElement("You are in "+rightForm)
+            else:
+                gamefunctions.textElement("This location is not around.")
+        else:
+            print("Houston we've got a problem")
 
     def travelTo(self, place):
         print("GAME: You can travel to: " + str(locationsLib.travelToLocations) + ".")
         if place in locationsLib.travelToLocations:
-              print("GAME: You are travelling to " + place + ".")
+              print("You are travelling to " + place + ".")
         else:
-            print("GAME: This place does not exist.")
+            print("This place does not exist.")
 
     # ACTION METHODS
 
@@ -173,7 +171,7 @@ WEAPONS
     def take(self, what):
         pass
 
-    def give(self, what):
+    def give(self, what, toWho):
         pass
 
     def pickUp(self, what):
@@ -199,32 +197,29 @@ WEAPONS
             pass
 
     def sleep(self):
-        if self.location == "Save House":
+        if self.location == "Save-house":
             self.daysInGame += 1
-            gamefunctions.textElement("GAME: Going to bed.")
-            loading.loading(loading.loadingBar)
-            gamefunctions.textElement("INFO: You feel well rested!:)")
+            gamefunctions.textElement("Going to sleep.")
+            loading.sleeping(loading.sleepingBar)
+            gamefunctions.textElement("You feel well rested!:)")
         else:
-            gamefunctions.textElement("WARNING: You need to be at Save house to be able to sleep!")
+            gamefunctions.textElement("You need to be at Save house to be able to sleep!")
 
     def eat(self, food):
-        if food == "":
-            gamefunctions.textElement("WARNING! You need to use at least one argument!")
+        if food in self.inventory:
+            self.inventory.pop(food)
+            self.hunger -= itemsLib.foodProps[food][0]
+            if self.hunger <= 0:
+                self.hunger = 0
+            self.health += itemsLib.foodProps[food][1]
+            if self.health >= 100:
+                self.health = 100
+            self.thirst -= itemsLib.foodProps[food][2]
+            if self.thirst <= 0:
+                self.thirst = 0
+            gamefunctions.textElement("INFO: You ate " + food + ".")            
         else:
-            if food in self.inventory:
-                self.inventory.pop(food)
-                self.hunger -= itemsLib.foodProps[food][0]
-                if self.hunger <= 0:
-                    self.hunger = 0
-                self.health += itemsLib.foodProps[food][1]
-                if self.health >= 100:
-                    self.health = 100
-                self.thirst -= itemsLib.foodProps[food][2]
-                if self.thirst <= 0:
-                    self.thirst = 0
-                gamefunctions.textElement("INFO: You ate " + food + ".")            
-            else:
-                gamefunctions.textElement("WARNING: You don't have " + food + " in your inventory!")
+            gamefunctions.textElement("WARNING: You don't have " + food + " in your inventory!")
 
     def drink(self, beverage):
         if beverage in self.inventory:
@@ -309,71 +304,74 @@ WEAPONS
             gamefunctions.textElement("WARNING: You don't have " + item + " in your inventory!")
 
     def unequip(self, item):
-        typeToEquip = itemsLib.itemType[item][0]
-        whereToEquip = itemsLib.itemType[item][1]
-
-        if typeToEquip == "clothes":
-            if self.equippedClothes[whereToEquip] == item:
-                if self.equippedClothes[whereToEquip] in self.inventory:
-                    self.inventory[item] += 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
+        if item in itemsLib.items:
+            typeToEquip = itemsLib.itemType[item][0]
+            whereToEquip = itemsLib.itemType[item][1]
+                #unequip all things
+            if typeToEquip == "clothes":
+                if self.equippedClothes[whereToEquip] == item:
+                    if self.equippedClothes[whereToEquip] in self.inventory:
+                        self.inventory[item] += 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    else:
+                        self.inventory[item] = 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    self.equippedClothes[whereToEquip] = ""
+                    self.defense -= itemsLib.clothesProps[item][3]
                 else:
-                    self.inventory[item] = 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
-                self.equippedClothes[whereToEquip] = ""
-                self.defense -= itemsLib.clothesProps[item][3]
-            else:
-                print("WARNING: This item is not equipped!")
-        elif typeToEquip == "armor":
-            if self.equippedArmor[whereToEquip] == item:
-                if self.equippedArmor[whereToEquip] in self.inventory:
-                    self.inventory[item] += 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
+                    print("This item is not equipped!")
+            elif typeToEquip == "armor":
+                if self.equippedArmor[whereToEquip] == item:
+                    if self.equippedArmor[whereToEquip] in self.inventory:
+                        self.inventory[item] += 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    else:
+                        self.inventory[item] = 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    self.equippedArmor[whereToEquip] = ""
+                    self.defense -= itemsLib.armorProps[item][3]
                 else:
-                    self.inventory[item] = 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
-                self.equippedArmor[whereToEquip] = ""
-                self.defense -= itemsLib.armorProps[item][3]
-            else:
-                print("WARNING: This item is not equipped!")
-        elif typeToEquip == "weapons":
-            if self.equippedWeapons[whereToEquip] == item:
-                if self.equippedWeapons[whereToEquip] in self.inventory:
-                    self.inventory[item] += 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
+                    print("This item is not equipped!")
+            elif typeToEquip == "weapons":
+                if self.equippedWeapons[whereToEquip] == item:
+                    if self.equippedWeapons[whereToEquip] in self.inventory:
+                        self.inventory[item] += 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    else:
+                        self.inventory[item] = 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    self.equippedWeapons[whereToEquip] = ""
+                    self.attack -= itemsLib.weaponsProps[item][2]
                 else:
-                    self.inventory[item] = 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
-                self.equippedWeapons[whereToEquip] = ""
-                self.attack -= itemsLib.weaponsProps[item][2]
-            else:
-                print("WARNING: This item is not equipped!")
-        elif typeToEquip == "gloves":
-            if self.equippedGloves[whereToEquip] == item:
-                if self.equippedGloves[whereToEquip] in self.inventory:
-                    self.inventory[item] += 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
+                    print("This item is not equipped!")
+            elif typeToEquip == "gloves":
+                if self.equippedGloves[whereToEquip] == item:
+                    if self.equippedGloves[whereToEquip] in self.inventory:
+                        self.inventory[item] += 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    else:
+                        self.inventory[item] = 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    self.equippedGloves[whereToEquip] = ""
+                    self.defense -= itemsLib.glovesProps[item][3]
                 else:
-                    self.inventory[item] = 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
-                self.equippedGloves[whereToEquip] = ""
-                self.defense -= itemsLib.glovesProps[item][3]
-            else:
-                print("WARNING: This item is not equipped!")
-        elif typeToEquip == "shoes":
-            if self.equippedShoes[whereToEquip] == item:
-                if self.equippedShoes[whereToEquip] in self.inventory:
-                    self.inventory[item] += 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
+                    print("This item is not equipped!")
+            elif typeToEquip == "shoes":
+                if self.equippedShoes[whereToEquip] == item:
+                    if self.equippedShoes[whereToEquip] in self.inventory:
+                        self.inventory[item] += 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    else:
+                        self.inventory[item] = 1
+                        print(item + " was un-equipped and added into your inventory.")
+                    self.equippedShoes[whereToEquip] = ""
+                    self.defense -= itemsLib.shoesProps[item][3]
                 else:
-                    self.inventory[item] = 1
-                    print("INFO: " + item + " was un-equipped and added into your inventory.")
-                self.equippedShoes[whereToEquip] = ""
-                self.defense -= itemsLib.shoesProps[item][3]
+                    print("This item is not equipped!")
             else:
-                print("WARNING: This item is not equipped!")
+                print("This item cannot be un-equipped!")
         else:
-            print("WARNING: This item cannot be un-equipped!")
+            gamefunctions.textElement2("This item does not exist")
 
     def inspect(self, what):
         # přidat hodnotu do itemu v inventáři která říká, kolikrát byl item prozkoumán. podle toho zjistíme o itemu víc. první pohled nestačí. (přidat do Hardcore modu)
@@ -388,7 +386,7 @@ WEAPONS
             print("INFO: Sorry, I have nothing for ya")
 
     def inv(self):
-        print(self.inventory)
+        gamefunctions.printInventory()
         
     def addContact(self,contact):
         self.contats.append(contact)
@@ -407,6 +405,7 @@ WEAPONS
         #pass
 
     def train(self, skill): # if location == trainjard -> dát na výběr možnosti co trénovat
-        pass
+        if self.location == "Training-Yard":
+            textElement("You can tran these skills:")
 
 player = Player("Jerry")
