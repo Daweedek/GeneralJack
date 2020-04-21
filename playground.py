@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import time, sys
 
 introText = "Ahoj,dneska je venku opravdu hezky. Jsem rád,že se můžeme procházet venku,sbírat květiny a vesele venku pochytávat koronavirus,který je opravdu nakažlivý. Umřelo na něj už několik tisíc lidí,ale to nám nevadí,protože žijeme ve vyspělém státě,který se o nás postará."

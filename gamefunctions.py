@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import time, sys, os
 import locationsLib
 import playerLib
@@ -407,9 +408,9 @@ def prolog():
     active = True
     centerText("PROLOG")
     textElement2(prologText)
-    print()
+    print("")
     contactElement("Paul")
-    print()
+    print("")
     actualObjective()
     while active:
         nextMove = input("COMMAND: ")

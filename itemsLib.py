@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 # ITEMS STATS
 
 #UN-EQUIPABLE ITEMS

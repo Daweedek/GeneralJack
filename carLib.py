@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 class Car:
     def __init__(self):
         self.speed = 0

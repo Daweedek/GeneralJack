@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import time
 import random
 
@@ -183,7 +184,8 @@ Endurance: """+str(self.endurance)+""" / 100
         pass
 
     def buy(self, what): # odebere od prodejce item, tobě vezme peníze, musíš být v jeho lokaci
-        pass
+        for i in range(6):
+            print("predmet")
 
     def sell(self, what): # odebere od tebe item, prodejci vezme peníze, musíš být v jeho lokaci
         pass
