@@ -8,7 +8,7 @@ import generation
 # WORLD LOCATIONS
 travelToLocations = {"city" : "Steep Hills", "village" : "Old Castle"}
 
-# room commands = heal, trade, craft, start, end, save, load, sleep, upgrade, repair
+# room commands = heal, trade, craft, start, end, save, load, sleep, upgrade, repair, buy, sell
 
 city = {
     #location : [indoor/outdoor,room description,unique commands, go to locations,items,[npcs]]
@@ -63,7 +63,7 @@ city = {
     "Garage" : ["indoor",
                 "Keyhanger on the wall, car in the middle and some shelves.",
                 "'upgrade', 'repair'",
-                ["Save-House","Street"],
+                ["Save-house","Street"],
                 "list –> room items (pocet,objevene)"],
     "Save-house" : ["indoor",
                     "Bed in the corner, fridge, window, broken tv and doors to my garage.",
@@ -73,7 +73,7 @@ city = {
     "Street" : ["outdoor",
                 "Just a street. A way to go somewhere.",
                 "'go-to', 'travel-to'",
-               ["Garage", "Market", "Doctor", "Heliport", "Laboratory", "Save-House"],
+               ["Garage", "Market", "Doctor", "Heliport", "Laboratory", "Save-house"],
                 "list –> room items (pocet,objevene)"]
     }
 

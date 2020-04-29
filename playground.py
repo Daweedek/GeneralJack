@@ -27,6 +27,27 @@ def textAdapt(text):
             process = ""
     return edited[:-2]
 
+def textAdapt2(text):
+    textLenght = len(text)
+    rest = textLenght % 76
+    missing = 76 - rest
+    indexing = 0
+    process = ""
+    edited = ""
+    #making text enough long
+    if rest != 0:
+        text += missing*" "
+    #modifying text
+    process += "║ "
+    for char in text:
+        process += char
+        indexing += 1
+        if indexing %76 == 0:
+            process += " ║\n║ "
+            edited += process
+            process = ""
+    return edited[:-2]
+
 def animPrint(text):
     for char in text:
         sys.stdout.write(char)
@@ -89,4 +110,20 @@ def skillPrint(text, listOfSkills):
 
     print("*" + width2*" " +'*')
     print(width*'*')
-    
+
+sentences = ["tady bude brneni","tsady bude kalhoty","zde jsou lvi","mame radi koblihy","nesnasime brokolici","kudy z nudy","programovani je super",]
+def sentenceWriter(sentences):
+    print('╔'+width2*'═'+'╗')
+    print("║" + width2*" " + "║")
+    for i in range(len(sentences)):
+        animPrint(textAdapt2(str(sentences[i])))
+        print("║" + width2*" " + "║")          
+    print('╚'+width2*'═'+'╝')
+
+vejce = 0
+
+def pridejvejce():
+    global vejce
+    vejce += 1
+    print("pridano")
+    print(vejce)

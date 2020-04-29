@@ -3,7 +3,108 @@
 
 #UN-EQUIPABLE ITEMS
 # hunger decrease / hp increase / thirst decrease / weight PŘIDAT!!!! / value of the item / description     Hardcore = pokud je jídlo 100% ok
-items = []
+items = [
+    'steak', 'apple', 'roll', 'cake', 'bread', 'MRE', 'burger', 'taco', 'kebab', 'cheesecake',
+     'pear', 'banana', 'broccoli', 'chips', 'cookies','water', 'sugar-water', 'energy-drink', 'dirty-water',
+     'melted-snow', 'sprinkling-water', 'beer', 'vodka', 'sprint', 'koko-kola', 'apple-juice', 'lemon-juice',
+     'tea', 'coffee', 'milk', 'key', 'wrench', 'tissues', 'revolver', 'pistol', 'sniper-rifle', 'knife', 'machette', 
+     'bottle', 'broken-bottle', 'hunting-knife', 'syringe', 'cap', 'winter-hat', 'hat', 't-shirt', 'sweatshirt', 'coat', 
+     'sweater', 'jacket', 'bomber-jacket', 'leggins', 'shorts', 'jeans', 'pants', 'tactical-pants', 'helmet', 'light-armored-helmet', 
+     'heavy-armored-helmet', 'light-tactical-helmet', 'heavy-tactical-helmet', 'lab-coat', 'apron', 'winter-coat', 'vest', 
+     'light-armored-vest', 'heavy-armored-vest', 'light-tactical-vest', 'heavy-tactical-vest', 'protectors', 'light-armored-protectors', 
+     'heavy-armored-protectors', 'light-tactical-protectors', 'heavy-tactical-protectors', 'latex-gloves', 'winter-gloves', 'tactical-gloves', 'gloves', 
+     'light-armored-gloves', 'heavy-armored-gloves', 'light-tactical-gloves', 'heavy-tactical-gloves', 'sneakers', 'high-sneakers', 'oxford-shoes', 'trainers', 
+     'crocs', 'slippers', 'boots', 'light-armored-boots', 'heavy-armored-boots', 'light-tactical-boots', 'heavy-tactical-boots'
+]
+
+newitems={
+    #name / equipable / type / wheretoequip / weight / price / attack / defense / hunger-- / thirst-- / hp++ / value of the item /description
+
+    # 0-8 clothes, 9-17 armor, 18-26 gloves and shoes, 27-35 food, 36-44 beverage, 45-53 meds, 54-62 questItems, 63-71 weapons, 72-80 tools
+    'id0' : ['cap',True,'clothes','Head','','','','','','','','','',],
+    'id1' : ['straw-hat',True,'clothes','Head','','','','','','','','','',],
+    'id2' : ['scarf','',True,'clothes','Head','','','','','','','','',],
+    'id3' : ['t-shirt',True,'clothes','Body','','','','','','','','','',],
+    'id4' : ['sweatshirt',True,'clothes','Body','','','','','','','','','',],
+    'id5' : ['tank',True,'clothes','Body','','','','','','','','','',],
+    'id6' : ['jeans',True,'clothes','Legs','','','','','','','','','',],
+    'id7' : ['shorts',True,'clothes','Legs','','','','','','','','','',],
+    'id8' : ['sweatpants',True,'clothes','Legs','','','','','','','','','',],
+    'id9' : ['tactical-helmet',True,'armor','Head','','','','','','','','','',],
+    'id10' : ['army-helmet',True,'armor','Head','','','','','','','','','',],
+    'id11' : ['night-vision',True,'armor','Head','','','','','','','','','',],
+    'id12' : ['tactical-vest',True,'armor','Body','','','','','','','','','',],
+    'id13' : ['bulletproof-vest',True,'armor','Body','','','','','','','','','',],
+    'id14' : ['protectors',True,'armor','Body','','','','','','','','','',],
+    'id15' : ['tactical-pants',True,'armor','Legs','','','','','','','','','',],
+    'id16' : ['armored-pants',True,'armor','Legs','','','','','','','','','',],
+    'id17' : ['stealth-pants',True,'armor','Legs','','','','','','','','','',],
+    'id18' : ['rubber-gloves',True,'gloves','Gloves','','','','','','','','','',],
+    'id19' : ['armored-gloves',True,'gloves','Gloves','','','','','','','','','',],
+    'id20' : ['tactical-gloves',True,'gloves','Gloves','','','','','','','','','',],
+    'id21' : ['work-gloves',True,'gloves','Gloves','','','','','','','','','',],
+    'id22' : ['army-boots',True,'shoes','Shoes','','','','','','','','','',],
+    'id23' : ['slippers',True,'shoes','Shoes','','','','','','','','','',],
+    'id24' : ['flip-flops',True,'shoes','Shoes','','','','','','','','','',],
+    'id25' : ['sneakers',True,'shoes','Shoes','','','','','','','','','',],
+    'id26' : ['boots',True,'shoes','Shoes','','','','','','','','','',],
+    'id27' : ['apple',False,'food','---','','','','','','','','','',],
+    'id28' : ['bread',False,'food','---','','','','','','','','','',],
+    'id29' : ['steak',False,'food','---','','','','','','','','','',],
+    'id30' : ['hamburger',False,'food','---','','','','','','','','','',],
+    'id31' : ['potato',False,'food','---','','','','','','','','','',],
+    'id32' : ['orange',False,'food','---','','','','','','','','','',],
+    'id33' : ['banana',False,'food','---','','','','','','','','','',],
+    'id34' : ['cereal-bar',False,'food','---','','','','','','','','','',],
+    'id35' : ['mre',False,'food','---','','','','','','','','','',],
+    'id36' : ['water',False,'beverage','---','','','','','','','','','',],
+    'id37' : ['juice',False,'beverage','---','','','','','','','','','',],
+    'id38' : ['wine',False,'beverage','---','','','','','','','','','',],
+    'id39' : ['cola',False,'beverage','---','','','','','','','','','',],
+    'id40' : ['vodka',False,'beverage','---','','','','','','','','','',],
+    'id41' : ['beer',False,'beverage','---','','','','','','','','','',],
+    'id42' : ['milk',False,'beverage','---','','','','','','','','','',],
+    'id43' : ['coffee',False,'beverage','---','','','','','','','','','',],
+    'id44' : ['energy-drink',False,'beverage','---','','','','','','','','','',],
+    'id45' : ['painkillers',False,'meds','---','','','','','','','','','',],
+    'id46' : ['steroids',False,'meds','---','','','','','','','','','',],
+    'id47' : ['water-pills',False,'meds','---','','','','','','','','','',],
+    'id48' : ['antihunger',False,'meds','---','','','','','','','','','',],
+    'id49' : ['poison',False,'meds','---','','','','','','','','','',],
+    'id50' : ['antipoison',False,'meds','---','','','','','','','','','',],
+    'id51' : ['patch',False,'meds','---','','','','','','','','','',],
+    'id52' : ['syringe',False,'meds','---','','','','','','','','','',],
+    'id53' : ['bandage',False,'meds','---','','','','','','','','','',],
+    'id54' : ['','','','','','','','','','','','','',],
+    'id55' : ['','','','','','','','','','','','','',],
+    'id56' : ['','','','','','','','','','','','','',],
+    'id57' : ['','','','','','','','','','','','','',],
+    'id58' : ['','','','','','','','','','','','','',],
+    'id59' : ['','','','','','','','','','','','','',],
+    'id60' : ['','','','','','','','','','','','','',],
+    'id61' : ['','','','','','','','','','','','','',],
+    'id62' : ['','','','','','','','','','','','','',],
+    'id63' : ['','','','','','','','','','','','','',],
+    'id64' : ['','','','','','','','','','','','','',],
+    'id65' : ['','','','','','','','','','','','','',],
+    'id66' : ['','','','','','','','','','','','','',],
+    'id67' : ['','','','','','','','','','','','','',],
+    'id68' : ['','','','','','','','','','','','','',],
+    'id69' : ['','','','','','','','','','','','','',],
+    'id70' : ['','','','','','','','','','','','','',],
+    'id71' : ['','','','','','','','','','','','','',],
+    'id72' : ['','','','','','','','','','','','','',],
+    'id73' : ['','','','','','','','','','','','','',],
+    'id74' : ['','','','','','','','','','','','','',],
+    'id75' : ['','','','','','','','','','','','','',],
+    'id76' : ['','','','','','','','','','','','','',],
+    'id77' : ['','','','','','','','','','','','','',],
+    'id78' : ['','','','','','','','','','','','','',],
+    'id79' : ['','','','','','','','','','','','','',],
+    'id80' : ['','','','','','','','','','','','','',]
+}
+
+
 
 
 foodProps = {
@@ -17,11 +118,6 @@ foodProps = {
     "taco" : [60, 30, 30, "common item", "Just taco."],
     "kebab" : [60, 30, 30, "common item", "Mouthwatering."],
     "cheesecake" : [60, 30, 30, "common item", "cheese. cake. cheesecake."],
-    "pear" : [60, 30, 30, "common item", "Sweet pears are made of this.."],
-    "banana" : [60, 30, 30, "special item", "WHAT A POWERFUL BANANA!!!"], # special item
-    "broccoli" : [60, 30, 30, "common item", "Ughh..."],
-    "chips" : [5, (-1), (-5), "common item", "Salt flavouring."],
-    "cookies" : [5, (-1), (-5), "common item", "Cocolate chips cookies"],
     }
 
 # thirst decrease / hp increase / hunger decrease / value of the item / description     Hardcore = pokud je jídlo 100% ok.. #postava se pozvrací pokud je -5 přidat [číslo]

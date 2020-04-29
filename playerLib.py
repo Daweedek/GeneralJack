@@ -30,7 +30,7 @@ class Player:
         self.strength = 0 # combat without guns
         self.sneaking = 0 # more chance you can sneak  random.randint(0,self.sneaking)
         self.alchemy = 0 # alchemy = 100 -> potion has better effect
-        self.endurance = 0 # dunno why yet
+        self.endurance = 1.0 # decreasing the number that decreases your ht
             
         # fighting stats
         self.attack = 10 # grows with a gun
@@ -86,41 +86,19 @@ class Player:
 
     # INFO METHODS        
     def generalInfo(self):
-        print("""       GENERAL INFO
-**************************
-GENERAL INFO
+        gamefunctions.printGeneralInfo()
 
-Name: """+str(self.playerName)+"""
-Level: """+str(self.level)+"""
-HP: """+str(self.health)+""" / 100
-XP: """+str(self.xp)+""" / """+str(self.nextLevel)+"""
-Gold: """+str(self.gold)+"""
-Carry: """+str(self.carryWeight)+""" / """+str(self.maxCarryWeight)+"""
-Position """+ self.position+"""
-Location """+self.location+"""
+    def info(self):
+        gamefunctions.printInfo()
 
-**************************
-HUNGER & THIRST
+    def ht(self):
+        gamefunctions.printHt()
 
-Hunger: """+str(self.hunger)+""" / 100
-Thirst: """+str(self.thirst)+""" / 100
+    def ad(self):
+        gamefunctions.printAd()
 
-**************************
-ATTACK & DEFENSE
-
-Attack: """+str(self.attack)+""" / 100
-Defense: """+str(self.defense)+""" / 100
-Critical chance: """+str(self.critChance)+""" / 100
-
-**************************
-ABILITIES
-
-Strength: """+str(self.strength)+""" / 100
-Sneaking: """+str(self.sneaking)+""" / 100
-Alchemy: """+str(self.alchemy)+""" / 100
-Endurance: """+str(self.endurance)+""" / 100
-
-**************************""")
+    def ab(self):
+        gamefunctions.printAb()
     
     def equipment(self):
         gamefunctions.printEquipment()
@@ -169,9 +147,6 @@ Endurance: """+str(self.endurance)+""" / 100
     def use(self, what): # lever, elevator etc...
         pass
 
-    def take(self, what):
-        pass
-
     def give(self, what, toWho):
         pass
 
@@ -186,6 +161,7 @@ Endurance: """+str(self.endurance)+""" / 100
     def buy(self, what): # odebere od prodejce item, tobě vezme peníze, musíš být v jeho lokaci
         for i in range(6):
             print("predmet")
+            i+=1
 
     def sell(self, what): # odebere od tebe item, prodejci vezme peníze, musíš být v jeho lokaci
         pass
@@ -219,9 +195,9 @@ Endurance: """+str(self.endurance)+""" / 100
             self.thirst -= itemsLib.foodProps[food][2]
             if self.thirst <= 0:
                 self.thirst = 0
-            gamefunctions.textElement("INFO: You ate " + food + ".")            
+            gamefunctions.textElement("You ate " + food + ".")            
         else:
-            gamefunctions.textElement("WARNING: You don't have " + food + " in your inventory!")
+            gamefunctions.textElement("You don't have " + food + " in your inventory!")
 
     def drink(self, beverage):
         if beverage in self.inventory:
@@ -235,9 +211,9 @@ Endurance: """+str(self.endurance)+""" / 100
             self.hunger -= itemsLib.beverageProps[beverage][2]
             if self.hunger <= 0:
                 self.hunger = 0
-            gamefunctions.textElement("INFO: You took a sip of " + beverage + ".")
+            gamefunctions.textElement("You took a sip of " + beverage + ".")
         else:
-            gamefunctions.textElement("WARNING: You don't have " + beverage + " in your inventory!")
+            gamefunctions.textElement("You don't have " + beverage + " in your inventory!")
 
     def equip(self, item):
         typeToEquip = itemsLib.itemType[item][0]
@@ -252,9 +228,9 @@ Endurance: """+str(self.endurance)+""" / 100
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.clothesProps[item][3]
-                    gamefunctions.textElement("INFO: " + self.playerName + " was equipped with " + item + ".")
+                    gamefunctions.textElement(item.capitalize() + " was equipped.")
                 else:
-                    gamefunctions.textElement("WARNING: This item is already equipped!")
+                    gamefunctions.textElement("This item is already equipped!")
             elif typeToEquip == "armor":
                 if self.equippedArmor[whereToEquip] != item:
                     self.equippedArmor[whereToEquip] = item
@@ -263,9 +239,9 @@ Endurance: """+str(self.endurance)+""" / 100
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.armorProps[item][3]
-                    gamefunctions.textElement("INFO: " + self.playerName + " was equipped with " + item + ".")
+                    gamefunctions.textElement(item.capitalize() + " was equipped.")
                 else:
-                    gamefunctions.textElement("WARNING: This item is already equipped!")
+                    gamefunctions.textElement("This item is already equipped!")
             elif typeToEquip == "weapons":
                 if self.equippedWeapons[whereToEquip] != item:
                     self.equippedWeapons[whereToEquip] = item
@@ -274,9 +250,9 @@ Endurance: """+str(self.endurance)+""" / 100
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.weaponsProps[item][2]
-                    gamefunctions.textElement("INFO: " + self.playerName + " was equipped with " + item + ".")
+                    gamefunctions.textElement(item.capitalize() + " was equipped.")
                 else:
-                    gamefunctions.textElement("WARNING: This item is already equipped!")
+                    gamefunctions.textElement("This item is already equipped!")
             elif typeToEquip == "gloves":
                 if self.equippedGloves[whereToEquip] != item:
                     self.equippedGloves[whereToEquip] = item
@@ -286,9 +262,9 @@ Endurance: """+str(self.endurance)+""" / 100
                         self.inventory.pop(item)
                     self.defense += itemsLib.glovesProps[item][3]
                     self.attack += itemsLib.glovesProps[item][2]
-                    gamefunctions.textElement("INFO: " + self.playerName + " was equipped with " + item + ".")
+                    gamefunctions.textElement(item.capitalize() + " was equipped.")
                 else:
-                    gamefunctions.textElement("WARNING: This item is already equipped!")
+                    gamefunctions.textElement("This item is already equipped!")
             elif typeToEquip == "shoes":
                 if self.equippedShoes[whereToEquip] != item:
                     self.equippedShoes[whereToEquip] = item
@@ -297,13 +273,13 @@ Endurance: """+str(self.endurance)+""" / 100
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.shoesProps[item][3]
-                    gamefunctions.textElement("INFO: " + self.playerName + " was equipped with " + item + ".")
+                    gamefunctions.textElement(item.capitalize() + " was equipped.")
                 else:
-                    gamefunctions.textElement("WARNING: This item is already equipped!")
+                    gamefunctions.textElement("This item is already equipped!")
             else:
-                gamefunctions.textElement("WARNING: This item cannot be equipped!")
+                gamefunctions.textElement("This item cannot be equipped!")
         else:
-            gamefunctions.textElement("WARNING: You don't have " + item + " in your inventory!")
+            gamefunctions.textElement("You don't have " + item + " in your inventory!")
 
     def unequip(self, item):
         if item in itemsLib.items:
@@ -314,71 +290,71 @@ Endurance: """+str(self.endurance)+""" / 100
                 if self.equippedClothes[whereToEquip] == item:
                     if self.equippedClothes[whereToEquip] in self.inventory:
                         self.inventory[item] += 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     else:
                         self.inventory[item] = 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     self.equippedClothes[whereToEquip] = ""
                     self.defense -= itemsLib.clothesProps[item][3]
                 else:
-                    print("This item is not equipped!")
+                    gamefunctions.textElement("This item is not equipped!")
             elif typeToEquip == "armor":
                 if self.equippedArmor[whereToEquip] == item:
                     if self.equippedArmor[whereToEquip] in self.inventory:
                         self.inventory[item] += 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     else:
                         self.inventory[item] = 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item + " was un-equipped and added into your inventory.")
                     self.equippedArmor[whereToEquip] = ""
                     self.defense -= itemsLib.armorProps[item][3]
                 else:
-                    print("This item is not equipped!")
+                    gamefunctions.textElement("This item is not equipped!")
             elif typeToEquip == "weapons":
                 if self.equippedWeapons[whereToEquip] == item:
                     if self.equippedWeapons[whereToEquip] in self.inventory:
                         self.inventory[item] += 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     else:
                         self.inventory[item] = 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     self.equippedWeapons[whereToEquip] = ""
                     self.attack -= itemsLib.weaponsProps[item][2]
                 else:
-                    print("This item is not equipped!")
+                    gamefunctions.textElement("This item is not equipped!")
             elif typeToEquip == "gloves":
                 if self.equippedGloves[whereToEquip] == item:
                     if self.equippedGloves[whereToEquip] in self.inventory:
                         self.inventory[item] += 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     else:
                         self.inventory[item] = 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     self.equippedGloves[whereToEquip] = ""
                     self.defense -= itemsLib.glovesProps[item][3]
                 else:
-                    print("This item is not equipped!")
+                    gamefunctions.textElement("This item is not equipped!")
             elif typeToEquip == "shoes":
                 if self.equippedShoes[whereToEquip] == item:
                     if self.equippedShoes[whereToEquip] in self.inventory:
                         self.inventory[item] += 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     else:
                         self.inventory[item] = 1
-                        print(item + " was un-equipped and added into your inventory.")
+                        gamefunctions.textElement(item.capitalize() + " was un-equipped and added into your inventory.")
                     self.equippedShoes[whereToEquip] = ""
                     self.defense -= itemsLib.shoesProps[item][3]
                 else:
-                    print("This item is not equipped!")
+                    gamefunctions.textElement("This item is not equipped!")
             else:
-                print("This item cannot be un-equipped!")
+                gamefunctions.textElement("This item cannot be un-equipped!")
         else:
-            gamefunctions.textElement2("This item does not exist")
+            gamefunctions.textElement("This item does not exist")
 
     def inspect(self, what):
-        # přidat hodnotu do itemu v inventáři která říká, kolikrát byl item prozkoumán. podle toho zjistíme o itemu víc. první pohled nestačí. (přidat do Hardcore modu)
-        #print(itemsLib.clothesProps[what][-1])
+        #gamefunctions.textElement2()[-1]
         pass
+
 
     def callForQuest(self): # XX % chance to call and get a random generated quest. 
         randomChance = random.randint(0, 100)
@@ -391,7 +367,7 @@ Endurance: """+str(self.endurance)+""" / 100
         gamefunctions.printInventory()
         
     def addContact(self,contact):
-        self.contats.append(contact)
+        self.contacts.append(contact)
         
     def removeContact(self,contact):
         self.contacts.remove(contact)
@@ -408,6 +384,6 @@ Endurance: """+str(self.endurance)+""" / 100
 
     def train(self, skill): # if location == trainjard -> dát na výběr možnosti co trénovat
         if self.location == "Training-Yard":
-            textElement("You can tran these skills:")
+            gamefunctions.textElement("You can tran these skills:")
 
 player = Player("Jerry")

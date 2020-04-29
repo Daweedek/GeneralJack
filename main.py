@@ -24,26 +24,41 @@ storyPlay = False
 freeride = False
 secondScreen = True
 
-#gamefunctions.logo()
-#time.sleep(5)
-#gamefunctions.gui()
+gamefunctions.logo()
+time.sleep(3)
+gamefunctions.gui()
 #MAIN MENU
 while menu:
-    #menuDecision = input("COMMAND: ")
-    menuDecision = 'play'
+    menuDecision = input("COMMAND: ")
+    menuDecision = menuDecision.lower()
+    #menuDecision = 'play'
     if menuDecision == "play":
         secondScreen = True
         gamefunctions.playButton()
         while secondScreen:
-            #menuDecision2 = input("COMMAND: ")
-            menuDecision2 = 'campaign'
+            menuDecision2 = input("COMMAND: ")
+            menuDecision2 = menuDecision2.lower()
+            #menuDecision2 = 'campaign'
             if menuDecision2 == "campaign":
                 storyPlay = True
+                annoy = True
                 generation.generatePlayer(generation.playerStartingItems)
-                #loading.loading(loading.loadingBar)
+                loading.loading(loading.loadingBar)
                 time.sleep(1.23)
-                #gamefunctions.intro()
-                print("Here game starts")
+                gamefunctions.intro()
+                while annoy:
+                    gamefunctions.textElement("Do you understand? YES / NO")
+                    confirm = input("COMMAND: ")
+                    confirm = confirm.lower()
+                    if confirm == 'yes' or confirm == 'y':
+                        gamefunctions.textElement("Good.")
+                        annoy = False
+                    elif confirm == 'no' or confirm == 'n':
+                        gamefunctions.textElement("Your fault.")
+                        annoy = False
+                    else:
+                        gamefunctions.textElement("What?")
+                #Here game starts
                 secondScreen = False
                 menu = False
                 break
@@ -64,7 +79,7 @@ while menu:
             else:
                 pass
     elif menuDecision == "info":
-        gamefunctions.textElement(infoText)
+        gamefunctions.textElement(gamefunctions.infoText)
     elif menuDecision == "quit":
         finalDes = input("GAME: Are you sure? Y / N (Unsaved progress will be deleted)\nCOMMAND: ")
         if finalDes == "yes" or finalDes == "y":

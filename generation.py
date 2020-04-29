@@ -9,7 +9,7 @@ import npcLib
 import playerLib
 import gamefunctions
 
-playerStartingItems = ["winter-hat","sweater","winter-coat","winter-gloves","pants","sneakers","hunting-knife",]
+playerStartingItems = ["cap","t-shirt","winter-coat","winter-gloves","pants","sneakers","hunting-knife",]
 questTypes= ["kidnapping","gettingInformations","pickUpAndDeliver","findSomeone","stealSomething","killSomeone",]
 
 def generatePlayer(items):
