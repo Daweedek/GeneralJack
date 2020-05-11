@@ -8,6 +8,7 @@ import random
 import time
 import sys
 import os
+import subprocess as sp
 
 import carLib
 import itemsLib
@@ -17,6 +18,8 @@ import playerLib
 import generation
 import gamefunctions
 import loading
+
+tmp = sp.call('cls',shell=True)
 
 # GAME LINE
 menu = True
@@ -29,26 +32,28 @@ time.sleep(3)
 gamefunctions.gui()
 #MAIN MENU
 while menu:
-    menuDecision = input("COMMAND: ")
-    menuDecision = menuDecision.lower()
-    #menuDecision = 'play'
+    #menuDecision = input("COMMAND: ")
+    #menuDecision = menuDecision.lower()
+    menuDecision = 'play' # toggle
     if menuDecision == "play":
+        tmp
         secondScreen = True
         gamefunctions.playButton()
         while secondScreen:
-            menuDecision2 = input("COMMAND: ")
-            menuDecision2 = menuDecision2.lower()
-            #menuDecision2 = 'campaign'
+            #menuDecision2 = input("COMMAND: ")
+            #menuDecision2 = menuDecision2.lower()
+            menuDecision2 = 'campaign' #toggle
             if menuDecision2 == "campaign":
                 storyPlay = True
                 annoy = True
                 generation.generatePlayer(generation.playerStartingItems)
                 loading.loading(loading.loadingBar)
                 time.sleep(1.23)
-                gamefunctions.intro()
+                #gamefunctions.intro()
                 while annoy:
-                    gamefunctions.textElement("Do you understand? YES / NO")
-                    confirm = input("COMMAND: ")
+                    #gamefunctions.textElement("Do you understand? YES / NO")
+                    #confirm = input("COMMAND: ")
+                    confirm = "y"
                     confirm = confirm.lower()
                     if confirm == 'yes' or confirm == 'y':
                         gamefunctions.textElement("Good.")

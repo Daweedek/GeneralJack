@@ -142,21 +142,155 @@ class Player:
     # ACTION METHODS
 
     def read(self, messageNumber): #message for quest.
+        #pokud jsou nejake zpravy na vyber, dej na vyber cislo
+        #   pokud je cislo v seznamu precti zpravu
+        #jinak rekni ze neni
+        #
+        #pokud nejsou zpravy, rekni ze nejsou zpravy:D
         pass
 
     def use(self, what): # lever, elevator etc...
         pass
 
     def give(self, what, toWho):
+        #pokud je item v inventari
+        #   z inventare hrace odeber  item
+        #       pokud je tam vickrat sniz cislo
+        #       odeber uplne pokud je jen jednou
+        # 
+        #   pridej ho do inventare npc
+        #       pokud je tam jednou pridej cislo
+        #       pokud tam neni, vytvor novy klic
+        #pokud neni, rekni ze neni:D
         pass
 
-    def pickUp(self, what):
-        # z inventare mistnosti odeber vyhozeny item
-        pass
+    def pickUp(self, item):
+        if player.position == "city":
+            if item in locationsLib.city[self.location][4]:
+                if item in self.inventory:
+                    #zvys jejich pocet
+                   self.inventory[item] += int(1)
+                else:
+                    #nebo vytvor novy klic
+                    self.inventory[item] = int(1)
+                
+                if locationsLib.city[self.location][4][item] >= 2:
+                    #sniz pocet
+                    locationsLib.city[self.location][4] -= 1
+                else:
+                    #jinak ho smaz
+                    del locationsLib.city[self.location][4][item]
+            else:
+                gamefunctions.textElement("This item is not in this room.")
 
-    def throwAway(self, what):
-        # do inventare mistnosti prida vyhozeny item
-        pass
+        elif player.position == "village":
+            if item in locationsLib.village[self.location][4]:
+                if item in self.inventory:
+                    #zvys jejich pocet
+                   self.inventory[item] += int(1)
+                else:
+                    #nebo vytvor novy klic
+                    self.inventory[item] = int(1)
+                
+                if locationsLib.village[self.location][4][item] >= 2:
+                    #sniz pocet
+                    locationsLib.village[self.location][4] -= 1
+                else:
+                    #jinak ho smaz
+                    del locationsLib.village[self.location][4][item]
+            else:
+                gamefunctions.textElement("This item is not in this room.")
+
+        elif player.position == "forrest":
+            if item in locationsLib.forrest[self.location][4]:
+                if item in self.inventory:
+                    #zvys jejich pocet
+                   self.inventory[item] += int(1)
+                else:
+                    #nebo vytvor novy klic
+                    self.inventory[item] = int(1)
+                
+                if locationsLib.forrest[self.location][4][item] >= 2:
+                    #sniz pocet
+                    locationsLib.forrest[self.location][4] -= 1
+                else:
+                    #jinak ho smaz
+                    del locationsLib.forrest[self.location][4][item]
+            else:
+                gamefunctions.textElement("This item is not in this room.")
+
+        elif player.position == "quests":
+            if item in locationsLib.quests[self.location][4]:
+                if item in self.inventory:
+                    #zvys jejich pocet
+                   self.inventory[item] += int(1)
+                else:
+                    #nebo vytvor novy klic
+                    self.inventory[item] = int(1)
+                
+                if locationsLib.quests[self.location][4][item] >= 2:
+                    #sniz pocet
+                    locationsLib.quests[self.location][4] -= 1
+                else:
+                    #jinak ho smaz
+                    del locationsLib.quests[self.location][4][item]
+            else:
+                gamefunctions.textElement("This item is not in this room.")
+        else:
+            gamefunctions.textElement("Unknown position")
+
+    def throwAway(self, item):
+        #pokud je item v inventari
+        if item in player.inventory:
+            #urceni mista
+            if player.position == "city":
+                #pridani itemu do mistnosti
+                #pokud je item v mistnotsti
+                if item in locationsLib.city[self.location][4]:
+                    #zvys jejich pocet
+                    locationsLib.city[self.location][4][item] += int(1)
+                else:
+                    #nebo vytvor novy klic
+                    locationsLib.city[self.location][4][item] = int(1)
+                #odebrani predmetu u hrace
+                #poku ho ma hrac vicekrat
+                if self.inventory[item] >= 2:
+                    #sniz pocet
+                    self.inventory[item] -= 1
+                else:
+                    #jinak ho smaz
+                    del self.inventory[item]
+            elif player.position == "village":
+                if item in locationsLib.village[self.location][4]:
+                    locationsLib.village[self.location][4][item] += int(1)
+                else:
+                    locationsLib.village[self.location][4][item] = int(1)
+                if self.inventory[item] >= 2:
+                    self.inventory[item] -= 1
+                else:
+                    del self.inventory[item]
+            elif player.position == "forrest":
+                if item in locationsLib.forrest[self.location][4]:
+                    locationsLib.forrest[self.location][4][item] += int(1)
+                else:
+                    locationsLib.forrest[self.location][4][item] = int(1)
+                if self.inventory[item] >= 2:
+                    self.inventory[item] -= 1
+                else:
+                    del self.inventory[item]
+            elif player.position == "quests":
+                if item in locationsLib.quests[self.location][4]:
+                    locationsLib.quests[self.location][4][item] += int(1)
+                else:
+                    locationsLib.quests[self.location][4][item] = int(1)
+                if self.inventory[item] >= 2:
+                    self.inventory[item] -= 1
+                else:
+                    del self.inventory[item]
+            else:
+                gamefunctions.textElement("Unknown position")
+        else:
+            gamefunctions.textElement("This item is not in your inventory.")
 
     def buy(self, what): # odebere od prodejce item, tobě vezme peníze, musíš být v jeho lokaci
         for i in range(6):
@@ -167,12 +301,60 @@ class Player:
         pass
 
     def lookAround(self): # in a room, place, discover things
+        # finish for other positions!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if self.position == 'city':
-            gamefunctions.textElement(locationsLib.city[self.location][1])
-        if self.position == 'village':
-            pass
-        if self.position == 'forrest':
-            pass
+            if len(locationsLib.city[self.location][4]) == 0:
+                gamefunctions.textElement("There are no items in this room.")
+            else:
+                print('╔'+gamefunctions.width2*'═'+'╗')
+                gamefunctions.centerTextInElement(self.location)
+                print("║" + gamefunctions.width2*" " + "║")
+                for item in locationsLib.city[self.location][4]:
+                    length = len("║ "+ str(item) + " ("+str(locationsLib.city[self.location][4][item])+")")
+                    space = gamefunctions.width2 - length
+                    print("║ "+ str(item) + " ("+str(locationsLib.city[self.location][4][item])+")"+space*" "+ " ║")
+                print("║" + gamefunctions.width2*" " + "║")
+                print('╚'+gamefunctions.width2*'═'+'╝')
+        elif self.position == 'village':
+            if len(locationsLib.village[self.location][4]) == 0:
+                gamefunctions.textElement("There are no items in this room.")
+            else:
+                print('╔'+gamefunctions.width2*'═'+'╗')
+                gamefunctions.centerTextInElement(self.location)
+                print("║" + gamefunctions.width2*" " + "║")
+                for item in locationsLib.village[self.location][4]:
+                    length = len("║ "+ str(item) + " ("+str(locationsLib.village[self.location][4][item])+")")
+                    space = gamefunctions.width2 - length
+                    print("║ "+ str(item) + " ("+str(locationsLib.village[self.location][4][item])+")"+space*" "+ " ║")
+                print("║" + gamefunctions.width2*" " + "║")
+                print('╚'+gamefunctions.width2*'═'+'╝')
+        elif self.position == 'forrest':
+            if len(locationsLib.forrest[self.location][4]) == 0:
+                gamefunctions.textElement("There are no items in this room.")
+            else:
+                print('╔'+gamefunctions.width2*'═'+'╗')
+                gamefunctions.centerTextInElement(self.location)
+                print("║" + gamefunctions.width2*" " + "║")
+                for item in locationsLib.forrest[self.location][4]:
+                    length = len("║ "+ str(item) + " ("+str(locationsLib.forrest[self.location][4][item])+")")
+                    space = gamefunctions.width2 - length
+                    print("║ "+ str(item) + " ("+str(locationsLib.forrest[self.location][4][item])+")"+space*" "+ " ║")
+                print("║" + gamefunctions.width2*" " + "║")
+                print('╚'+gamefunctions.width2*'═'+'╝')
+        elif self.position == 'quests':
+            if len(locationsLib.quests[self.location][4]) == 0:
+                gamefunctions.textElement("There are no items in this room.")
+            else:
+                print('╔'+gamefunctions.width2*'═'+'╗')
+                gamefunctions.centerTextInElement(self.location)
+                print("║" + gamefunctions.width2*" " + "║")
+                for item in locationsLib.quests[self.location][4]:
+                    length = len("║ "+ str(item) + " ("+str(locationsLib.quests[self.location][4][item])+")")
+                    space = gamefunctions.width2 - length
+                    #print(str(item) +" (" + str(playerLib.player.inventory[item])+") ")
+                    print("║ "+ str(item) + " ("+str(locationsLib.quests[self.location][4][item])+")"+space*" "+ " ║")
+                print("║" + gamefunctions.width2*" " + "║")
+                print('╚'+gamefunctions.width2*'═'+'╝')
 
     def sleep(self):
         if self.location == "Save-house":
@@ -223,8 +405,8 @@ class Player:
             if typeToEquip == "clothes":
                 if self.equippedClothes[whereToEquip] != item:
                     self.equippedClothes[whereToEquip] = item
-                    if self.inventory[item] >= 2:
-                        self.inventory[item] -= 1
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.clothesProps[item][3]
@@ -234,8 +416,8 @@ class Player:
             elif typeToEquip == "armor":
                 if self.equippedArmor[whereToEquip] != item:
                     self.equippedArmor[whereToEquip] = item
-                    if self.inventory[item] >= 2:
-                        self.inventory[item] -= 1
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.armorProps[item][3]
@@ -245,8 +427,8 @@ class Player:
             elif typeToEquip == "weapons":
                 if self.equippedWeapons[whereToEquip] != item:
                     self.equippedWeapons[whereToEquip] = item
-                    if self.inventory[item] >= 2:
-                        self.inventory[item] -= 1
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.weaponsProps[item][2]
@@ -256,8 +438,8 @@ class Player:
             elif typeToEquip == "gloves":
                 if self.equippedGloves[whereToEquip] != item:
                     self.equippedGloves[whereToEquip] = item
-                    if self.inventory[item] >= 2:
-                        self.inventory[item] -= 1
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.glovesProps[item][3]
@@ -268,8 +450,8 @@ class Player:
             elif typeToEquip == "shoes":
                 if self.equippedShoes[whereToEquip] != item:
                     self.equippedShoes[whereToEquip] = item
-                    if self.inventory[item] >= 2:
-                        self.inventory[item] -= 1
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
                     else:
                         self.inventory.pop(item)
                     self.defense += itemsLib.shoesProps[item][3]
@@ -384,6 +566,73 @@ class Player:
 
     def train(self, skill): # if location == trainjard -> dát na výběr možnosti co trénovat
         if self.location == "Training-Yard":
-            gamefunctions.textElement("You can tran these skills:")
+            gamefunctions.textElementer(["You can tran these skills:","test","test","test"])
+
+    #----------- optional functions
+    def equip2(self, item):
+        typeToEquip = itemsLib.itemType[item][0]
+        whereToEquip = itemsLib.itemType[item][1]
+
+        if item in self.inventory:
+            if typeToEquip == "clothes":
+                if self.equippedClothes[whereToEquip] != item:
+                    self.equippedClothes[whereToEquip] = item
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
+                    else:
+                        self.inventory.pop(item)
+                    self.defense += itemsLib.clothesProps[item][3]
+                    #gamefunctions.textElement(item.capitalize() + " was equipped.")
+                else:
+                    gamefunctions.textElement("This item is already equipped!")
+            elif typeToEquip == "armor":
+                if self.equippedArmor[whereToEquip] != item:
+                    self.equippedArmor[whereToEquip] = item
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
+                    else:
+                        self.inventory.pop(item)
+                    self.defense += itemsLib.armorProps[item][3]
+                    #gamefunctions.textElement(item.capitalize() + " was equipped.")
+                else:
+                    gamefunctions.textElement("This item is already equipped!")
+            elif typeToEquip == "weapons":
+                if self.equippedWeapons[whereToEquip] != item:
+                    self.equippedWeapons[whereToEquip] = item
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
+                    else:
+                        self.inventory.pop(item)
+                    self.defense += itemsLib.weaponsProps[item][2]
+                    #gamefunctions.textElement(item.capitalize() + " was equipped.")
+                else:
+                    gamefunctions.textElement("This item is already equipped!")
+            elif typeToEquip == "gloves":
+                if self.equippedGloves[whereToEquip] != item:
+                    self.equippedGloves[whereToEquip] = item
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
+                    else:
+                        self.inventory.pop(item)
+                    self.defense += itemsLib.glovesProps[item][3]
+                    self.attack += itemsLib.glovesProps[item][2]
+                    #gamefunctions.textElement(item.capitalize() + " was equipped.")
+                else:
+                    gamefunctions.textElement("This item is already equipped!")
+            elif typeToEquip == "shoes":
+                if self.equippedShoes[whereToEquip] != item:
+                    self.equippedShoes[whereToEquip] = item
+                    if self.inventory[item] >= int(2):
+                        self.inventory[item] -= int(1)
+                    else:
+                        self.inventory.pop(item)
+                    self.defense += itemsLib.shoesProps[item][3]
+                   #gamefunctions.textElement(item.capitalize() + " was equipped.")
+                else:
+                    gamefunctions.textElement("This item is already equipped!")
+            else:
+                gamefunctions.textElement("This item cannot be equipped!")
+        else:
+            gamefunctions.textElement("You don't have " + item + " in your inventory!")
 
 player = Player("Jerry")

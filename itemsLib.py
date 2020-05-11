@@ -14,7 +14,7 @@ items = [
      'light-armored-vest', 'heavy-armored-vest', 'light-tactical-vest', 'heavy-tactical-vest', 'protectors', 'light-armored-protectors', 
      'heavy-armored-protectors', 'light-tactical-protectors', 'heavy-tactical-protectors', 'latex-gloves', 'winter-gloves', 'tactical-gloves', 'gloves', 
      'light-armored-gloves', 'heavy-armored-gloves', 'light-tactical-gloves', 'heavy-tactical-gloves', 'sneakers', 'high-sneakers', 'oxford-shoes', 'trainers', 
-     'crocs', 'slippers', 'boots', 'light-armored-boots', 'heavy-armored-boots', 'light-tactical-boots', 'heavy-tactical-boots'
+     'crocs', 'slippers', 'boots', 'light-armored-boots', 'heavy-armored-boots', 'light-tactical-boots', 'heavy-tactical-boots', 'salt'
 ]
 
 newitems={
@@ -118,6 +118,7 @@ foodProps = {
     "taco" : [60, 30, 30, "common item", "Just taco."],
     "kebab" : [60, 30, 30, "common item", "Mouthwatering."],
     "cheesecake" : [60, 30, 30, "common item", "cheese. cake. cheesecake."],
+    "salt" : [-2, 0, -8, "common item", "just a salt."]
     }
 
 # thirst decrease / hp increase / hunger decrease / value of the item / description     Hardcore = pokud je jídlo 100% ok.. #postava se pozvrací pokud je -5 přidat [číslo]
@@ -169,7 +170,7 @@ clothesProps = {
     #body
     "t-shirt" : [0.5, 100, 0, 0, 100, "common item", "Pretty much basic t-shirt."],
     "sweatshirt" : [0.5, 100, 0, 0, 100, "common item", ""],
-    "coat" : [0.5, 100, 0, 0, 100, "common item", "Luxurious coat"],
+    "winter-coat" : [0.5, 100, 0, 0, 100, "common item", "Luxurious coat"],
     "sweater" : [0.5, 100, 0, 0, 100, "common item", "Sweater, my grandma made"],
     "jacket" : [0.5, 100, 0, 0, 100, "common item", "Waterproof jacket."],
     "bomber-jacket" : [0.5, 100, 0, 0, 100, "common item", "Some stylish clothing is a need."],

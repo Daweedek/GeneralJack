@@ -5,20 +5,6 @@ import locationsLib
 import playerLib
 import generation
 
-gender = ["Man","Woman"]
-namesMan = ["Jeremy","Carl","Mark","Kevin","Marcus","Peter","Alfred","Jacob","Jake","Fred","Quido","Garry","Olly","Ben","Deke","Austin","James", "Diego"]
-namesWoman = ["Theresa","Anna","Caren","Rachel","Ellen","Jane","Caroline","Francesca","Daniella","Vivienne","Clara","Elisabeth","Mia","Henriette","Leona","Nora","Regina"]
-npcTypes = ["Doctor","Chemist","Grocer","Weapon dealer","Clothier"]
-enemyTypes = ["Bandit","Killer","Gangster","Slayer","Striker","Marauder",]
-
-npcTypeBasicProps = {
-    "Doctor" : ["shirt","lab coat","slippers","jeans",],
-    "Chemist" : ["sweatshirt","lab coat","crocs","jeans",],
-    "Grocer" : ["t-shirt","apron","crocs","jeans",],
-    "Weapon-dealer" : ["vest", "t-shirt", "boots", "tactical pants","pistol", "knife"], 
-    "Clothier" : ["apron", "jeans", "t-shirt","crocs","knife"],
-}
-
 class NPC:
     def __init__(self):
         # basic info
@@ -46,7 +32,10 @@ class NPC:
 
         #npc inventory
         self.inventory = {
-        } 
+        }
+
+        #selling items
+        self.tradingInv = {}
 
         # equipped items
         self.equippedClothes = {
@@ -74,3 +63,9 @@ class NPC:
             "Small weapon": "",
             "Melee" : ""
             }
+
+doctor = NPC()
+grocer = NPC()
+chemist = NPC()
+weapondealer = NPC()
+clothier = NPC()

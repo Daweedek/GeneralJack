@@ -57,9 +57,11 @@ introlist = [
 infoText = "Hello, my name is Ladislav Davídek. Once I want to be a game developer so I started with this game. This is my first text game. I have spent more than 100 hours on this game so I will appreciate some feedback. And now go play. Good luck!:) PS: this game was created during the CoronaVirus quarantine in 2020. Just FYI:D"
 helpText = ""
 prologText = "Come one. Get up, you lazy ass. Take your clothes on and meet me in the laboratory. Keys to your car are in garage. Arrive ASAP! I've got something for you. Don't let me wait! -P."
-paul1 = "Finally! Now, for my experiment, please go to the market and buy me some stuff.. Here, take the list. And now go. I have lot of work."
-market1 = "Now you are in the Market! Here are the all shops, where you can buy all the stuff you need and even something more. You need to go-to 'shop' and use command trade to start shopping/selling things."
+paul1 = "Finally! Now, for my experiment, please go to the market and visit Doctor. He will give you the ingredient I need. Now go!"
+market1 = "Now you are in the Market! Here are the all shops, where you can buy all the stuff you need and even something more. You need to go to the shop and use command 'trade' to start shopping/selling things."
 items1 = "Great! Now you got all the stuff and you can return to Laboratory!"
+itemsminus1 = "You are missing some items. Go find them."
+lab2text = "Alright, we can continue. Put that salt on the table and go mind your own business."
 
 def textAdapt(text):
     textLenght = len(text)
@@ -362,7 +364,6 @@ def prolog():
     mark = 0
     items = 0
     lab2 = 0
-    pot = 0
     global activeObjective
     global objectiveIndex
     active = True
@@ -392,7 +393,7 @@ def prolog():
                 speechElement(market1)
             else:
                 pass
-        if 'hunting-knife' in playerLib.player.inventory:
+        if 'salt' in playerLib.player.inventory:
             items += 1
             if items <= 1:
                 speechElement(items1)
@@ -401,8 +402,22 @@ def prolog():
                 objectiveIndex = objCount
             else:
                 pass
-        # if location laboratory a items in inventory rekne super, pojdme to udelat, probehne text o crafteni. pokud nemas zepta se co tady delas? potrebuju abys mi sehnal ty veci!
-        # if first potion in inventory - vypsat vyborne umis delat lektvary ; konec prologu.  
+                
+        if playerLib.player.location == "Laboratory" and 'salt' in playerLib.player.inventory and lab1 >= 1:
+            lab2 += 1
+            if lab2 <= 1:
+                speechElement(lab2text)
+                objCount += 1
+                activeObjective = objectives[objCount]
+                objectiveIndex = objCount
+                actualObjective(objectives, objCount)
+            else:
+                pass
+            
+        elif playerLib.player.location == "Laboratory" and 'salt' not in playerLib.player.inventory and lab1 >=1:
+            speechElement("Hey, you're missing something! Go find it fool!")
+        else:
+            pass
     
 def quest1():
     pass
@@ -634,17 +649,17 @@ def commandSorting(command):
 
         if commandPart == "trade" or commandPart == "trd":
             if playerLib.player.location ==  "Doctor":
-                textElementer(["Available itmes:", doctorItems])
+                textElementer(["Available itmes:", npcLib.doctor.tradingInv])
             elif playerLib.player.location == "Chemist":
-                textElementer(["Available itmes:", chemistItems])
+                textElementer(["Available itmes:", npcLib.chemist.tradingInv])
             elif playerLib.player.location ==  "Grocer":
-                textElementer(["Available itmes:", grocerItems])
+                textElementer(["Available itmes:", npcLib.grocer.tradingInv])
             elif playerLib.player.location ==  "Weapon-dealer":
-                textElementer(["Available itmes:", weadeaItems])
+                textElementer(["Available itmes:", npcLib.weadea.tradingInv])
             elif playerLib.player.location ==  "Armorer":
-                textElementer(["Available itmes:", armorerItems])
+                textElementer(["Available itmes:", npcLib.armorer.tradingInv])
             elif playerLib.player.location ==  "Clothier":
-                textElementer(["Available itmes:", clothierItems])
+                textElementer(["Available itmes:", npcLib.clothier.tradingInv])
             else:
                 textElement("You need to be inside of the shop")
     else:

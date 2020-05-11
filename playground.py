@@ -127,3 +127,10 @@ def pridejvejce():
     vejce += 1
     print("pridano")
     print(vejce)
+
+    
+neco = {"venku" : ["ahoj", "spatne", {},[]],"doma" : ["kuk", "spatne", {},[]]}
+inventar = {"kalhoty" : 1}
+def zahod(co):
+    pass
+    
